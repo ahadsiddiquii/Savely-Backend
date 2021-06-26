@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SavelyUser;
 use App\Models\Usersavings;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 
 class UsersavingsController extends Controller
@@ -14,7 +17,7 @@ class UsersavingsController extends Controller
      */
     public function index()
     {
-        //
+        return Usersavings::all();
     }
 
     /**
@@ -24,7 +27,18 @@ class UsersavingsController extends Controller
      */
     public function create()
     {
-        //
+        request()->validate([
+            'userid' => 'required',
+            'goalimagesrc' => 'required',
+            'goalname' => 'required',
+            'goalamount' => 'required'
+        ]);
+        Usersavings::create([
+            'userid' => request('userid'),        
+            'goalimagesrc' => request('goalimagesrc'),
+            'goalname'=> request('goalname'),
+            'goalamount' => request('goalamount'),
+        ]);
     }
 
     /**
@@ -44,9 +58,10 @@ class UsersavingsController extends Controller
      * @param  \App\Models\Usersavings  $usersavings
      * @return \Illuminate\Http\Response
      */
-    public function show(Usersavings $usersavings)
+    public function show(int $ids)
     {
-        //
+        $usersavings = DB::table('usersavings')->where('userid',$ids)->get();
+        return $usersavings;
     }
 
     /**
@@ -55,9 +70,23 @@ class UsersavingsController extends Controller
      * @param  \App\Models\Usersavings  $usersavings
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usersavings $usersavings)
+    public function edit(Usersavings $user)
     {
         //
+    }
+
+    public function editSavings(int $ids)
+    {
+        request()->validate([
+            'goalimagesrc' => 'required',
+            'goalname' => 'required',
+            'goalamount' => 'required'
+        ]);
+        DB::table('usersavings')->where('id', '=', $ids)->update([
+            'goalimagesrc' => request('goalimagesrc'),
+            'goalname'=> request('goalname'),
+            'goalamount' => request('goalamount'),
+        ]);
     }
 
     /**
@@ -78,8 +107,8 @@ class UsersavingsController extends Controller
      * @param  \App\Models\Usersavings  $usersavings
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usersavings $usersavings)
+    public function destroy(int $ids, int $userid)
     {
-        //
+        $usersavings = DB::table('usersavings')->where('id', '=', $ids, 'AND', 'userid', '=', $userid)->delete();
     }
 }

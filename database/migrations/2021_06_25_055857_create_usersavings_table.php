@@ -18,8 +18,8 @@ class CreateUsersavingsTable extends Migration
             $table->bigInteger('userid');
             $table->string('goalimagesrc');
             $table->string('goalname');
-            $table->float('goalamount');
-            $table->foreign('userid')->references('id')->on('savelyusers');
+            $table->double('goalamount', 20, 4);
+            $table->timestamps();
         });
     }
 

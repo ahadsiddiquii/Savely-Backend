@@ -54,9 +54,9 @@ class SavelyuserController extends Controller
      * @param  \App\Models\Savelyuser  $savelyuser
      * @return \Illuminate\Http\Response
      */
-    public function show(int $ids)
+    public function show(String $ids)
     {
-        $savelyuser = DB::table('savelyusers')->where('id',$ids)->get();
+        $savelyuser = DB::table('savelyusers')->where('userid',$ids)->get();
         return $savelyuser;
     }
 
@@ -66,6 +66,11 @@ class SavelyuserController extends Controller
      * @param  \App\Models\Savelyuser  $savelyuser
      * @return \Illuminate\Http\Response
      */
+    public function edit(Savelyuser $user)
+    {
+        //
+    }
+
     public function editImage(Savelyuser $user)
     {
         request()->validate([
@@ -104,8 +109,8 @@ class SavelyuserController extends Controller
      * @param  \App\Models\Savelyuser  $savelyuser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Savelyuser $savelyuser)
+    public function destroy(int $ids)
     {
-        //
+        $savelyuser = DB::table('savelyusers')->where('id', '=', $ids)->delete();
     }
 }
