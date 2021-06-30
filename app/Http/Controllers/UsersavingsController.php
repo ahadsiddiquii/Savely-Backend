@@ -31,13 +31,17 @@ class UsersavingsController extends Controller
             'userid' => 'required',
             'goalimagesrc' => 'required',
             'goalname' => 'required',
-            'goalamount' => 'required'
+            'goalamount' => 'required',
+            'amountsaved' => 'required',
+            'amountleft' => 'required'
         ]);
         Usersavings::create([
             'userid' => request('userid'),        
             'goalimagesrc' => request('goalimagesrc'),
             'goalname'=> request('goalname'),
             'goalamount' => request('goalamount'),
+            'amountsaved' => request('amountsaved'),
+            'amountleft' => request('amountleft'),
         ]);
     }
 
@@ -86,6 +90,18 @@ class UsersavingsController extends Controller
             'goalimagesrc' => request('goalimagesrc'),
             'goalname'=> request('goalname'),
             'goalamount' => request('goalamount'),
+        ]);
+    }
+
+    public function editSaveLeft(int $ids)
+    {
+        request()->validate([
+            'amountsaved' => 'required',
+            'amountleft' => 'required'
+        ]);
+        DB::table('usersavings')->where('id', '=', $ids)->update([
+            'amountsaved' => request('amountsaved'),
+            'amountleft' => request('amountleft')
         ]);
     }
 

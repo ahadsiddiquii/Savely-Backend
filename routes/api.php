@@ -5,6 +5,7 @@ use App\Models\Usersavings;
 
 use App\Http\Controllers\SavelyuserController;
 use App\Http\Controllers\UsersavingsController;
+use App\Http\Controllers\RecordsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,41 +49,12 @@ Route::delete('/usersavings/{ids}/{userid}',[UsersavingsController::class, 'dest
 
 Route::put('/usersavings/{ids}',[UsersavingsController::class, 'editSavings']);
 
-// Route::put('/usersavings/{userid}',[UsersavingsController::class, 'edit']);
-// Route::get('/usersavings',function(){
-//     return Usersavings::all();
-// });
-// Route::post('/usersavings',function(){
-//     request()->validate([
-//         'userid' => 'required',
-//         'goalimagesrc' => 'required',
-//         'goalname' => 'required',
-//         'goalamount' => 'required'
-//     ]);
-//     Usersavings::create([
-//         'userid' => request('userid'),        
-//         'goalimagesrc' => request('goalimagesrc'),
-//         'goalname'=> request('goalname'),
-//         'goalamount' => request('goalamount'),
-//     ]);
-// });
-// Route::get('/usersavings/{ids}',function(int $ids){
-//     $usersavings = DB::table('usersavings')->where('userid',$ids)->get();
-//     return $usersavings;
+Route::put('/usersavings/saveleft/{ids}',[UsersavingsController::class, 'editSaveLeft']);
 
-// });
-// Route::delete('/usersavings/{ids}/{userid}',function(int $ids, int $userid){
-//     $usersavings = DB::table('usersavings')->where('id', '=', $ids, 'AND', 'userid', '=', $userid)->delete();
-// });
-// Route::put('/usersavings/{ids}',function(int $ids){
-//     request()->validate([
-//         'goalimagesrc' => 'required',
-//         'goalname' => 'required',
-//         'goalamount' => 'required'
-//     ]);
-//     DB::table('usersavings')->where('id', '=', $ids)->update([
-//         'goalimagesrc' => request('goalimagesrc'),
-//         'goalname'=> request('goalname'),
-//         'goalamount' => request('goalamount'),
-//     ]);
-// });
+//records
+
+Route::post('/records',[RecordsController::class, 'create']);
+
+Route::get('/records',[RecordsController::class, 'index']);
+
+Route::get('/records/{ids}',[RecordsController::class, 'show']);

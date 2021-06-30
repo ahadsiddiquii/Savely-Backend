@@ -19,6 +19,8 @@ class CreateUsersavingsTable extends Migration
             $table->string('goalimagesrc');
             $table->string('goalname');
             $table->double('goalamount', 20, 4);
+            $table->double('amountsaved', 20, 4);
+            $table->double('amountleft', 20, 4);
             $table->timestamps();
         });
     }
