@@ -79,27 +79,27 @@ class UsersavingsController extends Controller
         //
     }
 
-    public function editSavings(int $ids)
+    public function editSavings(int $ids, int $userid)
     {
         request()->validate([
             'goalimagesrc' => 'required',
             'goalname' => 'required',
             'goalamount' => 'required'
         ]);
-        DB::table('usersavings')->where('id', '=', $ids)->update([
+        DB::table('usersavings')->where('id', '=', $ids , 'AND','userid','=',$userid)->update([
             'goalimagesrc' => request('goalimagesrc'),
             'goalname'=> request('goalname'),
             'goalamount' => request('goalamount'),
         ]);
     }
 
-    public function editSaveLeft(int $ids)
+    public function editSaveLeft(int $ids,int $userid)
     {
         request()->validate([
             'amountsaved' => 'required',
             'amountleft' => 'required'
         ]);
-        DB::table('usersavings')->where('id', '=', $ids)->update([
+        DB::table('usersavings')->where('id', '=', $ids, 'AND', 'userid', '=', $userid)->update([
             'amountsaved' => request('amountsaved'),
             'amountleft' => request('amountleft')
         ]);

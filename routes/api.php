@@ -47,9 +47,9 @@ Route::get('/usersavings/{ids}',[UsersavingsController::class, 'show']);
 
 Route::delete('/usersavings/{ids}/{userid}',[UsersavingsController::class, 'destroy']);
 
-Route::put('/usersavings/{ids}',[UsersavingsController::class, 'editSavings']);
+Route::put('/usersavings/{ids}/{userid}',[UsersavingsController::class, 'editSavings']);
 
-Route::put('/usersavings/saveleft/{ids}',[UsersavingsController::class, 'editSaveLeft']);
+Route::put('/usersavings/saveleft/{ids}/{userid}',[UsersavingsController::class, 'editSaveLeft']);
 
 //records
 
